@@ -44,8 +44,8 @@ The project is split between frontend (client) and backend (server) code:
 1.  **Clone the repository:**
 
     ```bash
-    git clone <your-repository-url>
-    cd <repository-directory>
+    git clone https://github.com/milosptr/tic-tac-toe
+    cd tic-tac-toe
     ```
 
 2.  **Install frontend dependencies:**
