@@ -84,11 +84,8 @@ export const MatchViewPage = () => {
     if (turn !== symbol || board[position] !== null || result) {
       return
     }
-    let newBoard = board
-    setBoard((prev) => {
-      newBoard = prev.map((_, index) => (index === position ? symbol : _))
-      return newBoard
-    })
+    const newBoard = board.map((cell, index) => (index === position ? symbol : cell))
+    setBoard(newBoard)
     setTurn((prev) => (prev === Symbol.X ? Symbol.O : Symbol.X))
 
     const isGameWinningMove = checkWinner(newBoard, symbol)
@@ -177,7 +174,7 @@ export const MatchViewPage = () => {
           </div>
         </Header.Right>
       </Header>
-      <Page className="flex flex-col items-center">
+      <Page className="flex flex-col items-center relative">
         {!match && (
           <div className="flex flex-col items-center">
             <div className="text-2xl font-bold text-center">Match not found</div>
@@ -275,6 +272,8 @@ const MatchCell = ({
     onClick(position)
   }
 
+  const iconSizeClass = 'w-2/3 h-2/3 sm:w-full sm:h-full'
+
   return (
     <div
       onClick={handleClick}
@@ -283,16 +282,16 @@ const MatchCell = ({
         !disabled && !symbol && 'cursor-pointer',
       )}
     >
-      <div className="w-full sm:w-1/2">
+      <div className="w-full sm:w-1/2 flex items-center justify-center">
         {!!symbol && (
           <>
-            {symbol === 'X' && <XIcon width={'100%'} height={'100%'} />}
-            {symbol === 'O' && <OIcon width={'100%'} height={'100%'} />}
+            {symbol === 'X' && <XIcon className={iconSizeClass} />}
+            {symbol === 'O' && <OIcon className={iconSizeClass} />}
           </>
         )}
         {!symbol && !disabled && (
-          <div className={'opacity-0 group-hover:opacity-30 transition duration-500'}>
-            <PlaceholderIcon width={'100%'} height={'100%'} />
+          <div className={'flex items-center justify-center opacity-0 group-hover:opacity-30 transition duration-500'}>
+            <PlaceholderIcon className={iconSizeClass} />
           </div>
         )}
       </div>
